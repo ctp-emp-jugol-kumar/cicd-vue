@@ -1,19 +1,28 @@
+name: Deploy to SFTP
+
 on:
   push:
     branches:
       - main
-name: 🚀 Deploy website on push
+
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  sftp-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v4
-    
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@2.0.0
-      with:
-        ftp_server: ftp.ctp.com.bd
-        ftp_username: cicdvue@my.ctpse.info
-        ftp_password: ${{ secrets.FTP_PASSWORD }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build project
+        run: |
+          npm install
+          npm run build
+
+      - name: Deploy to SFTP server
+        uses: appleboy/scp-action@master
+        with:
+          host: ftp.ctp.com.bd
+          username: cicdvue@my.ctpse.info
+          key: ${{ secrets.SFTP_KEY }}
+          port: 22
+          source: "dist/*"
+          target: "/path/to/remote/directory"
