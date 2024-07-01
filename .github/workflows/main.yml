@@ -11,12 +11,12 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v4
 
-      - name: Run Vue Node Modules Install
-        run: npm ci
+      - name: Node Modules Install
+        run: npm install
         
       - name: Build the project
         run: npm run build
-        
+
         env: 
           CI: false
       
