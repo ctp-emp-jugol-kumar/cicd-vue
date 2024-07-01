@@ -1,10 +1,6 @@
 name: FTP Deploy
 
-on:
-  push:
-    branches:
-      - main  # Change this to the branch you want to trigger the deploy from
-
+on: push
 jobs:
   deploy:
     runs-on: ubuntu-latest
