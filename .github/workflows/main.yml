@@ -19,7 +19,7 @@ jobs:
         with:
           host: ftp.ctp.com.bd
           username: cicdvue@my.ctpse.info
-          key: ${{ secrets.SFTP_KEY }}
+          key: ${{ secrets.FTP_PASSWORD }}
           port: 22
           source: "dist/*"
           target: "/path/to/remote/directory"
