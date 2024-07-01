@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  sftp-deploy:
+  ftp-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -17,11 +17,13 @@ jobs:
           npm install
           npm run build
 
-      - name: Deploy to SFTP server
-        uses: appleboy/scp-action@master
+      - name: Deploy to FTP server
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ftp.ctp.com.bd
+          server: ftp.ctp.com.bd
           username: cicdvue@my.ctpse.info
-          key: ${{ secrets.FTP_PASSWORD }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: dist/
+          protocol: ftps
           port: 21
-          source: "dist/*"
+          passive: true
