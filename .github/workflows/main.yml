@@ -14,12 +14,21 @@ jobs:
           npm install
           npm run build
 
+      - name: Test SFTP Connectivity
+        run: |
+          echo "${{ secrets.SEC_KEY }}" > private_key
+          chmod 600 private_key
+          ssh -i private_key -p 22 cicdvue@my.ctpse.info@ftp.ctp.com.bd "echo Connection successful"
+        env:
+          SFTP_KEY: ${{ secrets.SEC_KEY }}
+        continue-on-error: true
+
       - name: Deploy to SFTP server
         uses: appleboy/scp-action@master
         with:
           host: ftp.ctp.com.bd
           username: cicdvue@my.ctpse.info
           key: ${{ secrets.SEC_KEY }}
-          port: 21
+          port: 22
           source: "dist/*"
           target: "/path/to/remote/directory"
