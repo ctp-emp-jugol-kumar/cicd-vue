@@ -8,12 +8,13 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
 
       - name: Run Vue Node Modules Install
-      run: npm ci
-      env: 
-        CI: false
+        run: npm ci
+        env: 
+          CI: false
       
       - name: Deploy With FTP Action
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
