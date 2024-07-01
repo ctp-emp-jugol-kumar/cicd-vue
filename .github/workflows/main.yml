@@ -26,5 +26,5 @@ jobs:
           server: ftp.ctp.com.bd
           username: cicdvue@my.ctpse.info
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: build/
+          local-dir: dist/
 
