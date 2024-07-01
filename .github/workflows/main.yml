@@ -14,8 +14,6 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@2.0.0
       with:
-        protocol: FTPS
         server: ftp.ctp.com.bd
         username: cicdvue@my.ctpse.info
         password: ${{ secrets.FTP_PASSWORD }}
-        prot: 21
